@@ -20,7 +20,7 @@ class Flight:
 class Listing:
     flights: List[Flight] = field(default_factory=lambda: [])
 
-    def adding(self, stay, number, value):
+    def adding(self, stay, number, value) -> None:
         self.flights.append(
             Flight(
                 stay=stay,
@@ -29,7 +29,7 @@ class Listing:
             )
         )
 
-    def table(self):
+    def table(self) -> str:
         """Вывод скиска рейсов"""
         table = []
         line: str = '+-{}-+-{}-+-{}-+-{}-+'.format(
@@ -60,7 +60,7 @@ class Listing:
         table.append(line)
         return '\n'.join(table)
 
-    def selecting(self, nom):
+    def selecting(self, nom) -> List[str]:
         """Выбор рейсов по типу самолёта"""
         count = 0
         result = []
@@ -78,7 +78,7 @@ class Listing:
 
         return result
         
-    def load(self, filename):
+    def load(self, filename) -> str:
         with open(filename, 'r', encoding='utf8') as fin:
             xml = fin.read()
         parser = ET.XMLParser(encoding="utf8")
@@ -103,7 +103,7 @@ class Listing:
                     )
         return filename
 
-    def save(self, filename):
+    def save(self, filename) -> None:
         root = ET.Element('flights')
         for flight in self.flights:
             flights_element = ET.Element('flights')
@@ -120,7 +120,7 @@ class Listing:
             tree.write(fout, encoding='utf8', xml_declaration=True)
 
 
-def main(command_line=None):
+def main(command_line=None) -> None:
     staff = Listing()
     file_parser = argparse.ArgumentParser(add_help=False)
     file_parser.add_argument(
