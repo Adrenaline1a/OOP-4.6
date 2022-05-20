@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 from dataclasses import dataclass, field
 import argparse
 import pathlib
-from typing import List
+from typing import List, Optional
 import xml.etree.ElementTree as ET
 
 
@@ -120,7 +119,7 @@ class Listing:
             tree.write(fout, encoding='utf8', xml_declaration=True)
 
 
-def main(command_line:None=None) -> None:
+def main(command_line:Optional[str]=None) -> None:
     staff = Listing()
     file_parser = argparse.ArgumentParser(add_help=False)
     file_parser.add_argument(
